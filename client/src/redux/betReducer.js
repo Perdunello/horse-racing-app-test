@@ -1,9 +1,9 @@
 import io from "socket.io-client";
 
-const SET_HORSES_DATA = 'SET_HORSES_DATA'
-const SET_CONNECTION_INFO = 'SET_CONNECTION_INFO'
-const SET_SOCKET = 'SET_SOCKET'
-const SET_FINISHED_HORSE = 'SET_FINISHED_HORSE'
+export const SET_HORSES_DATA = 'SET_HORSES_DATA'
+export const SET_CONNECTION_INFO = 'SET_CONNECTION_INFO'
+export const SET_SOCKET = 'SET_SOCKET'
+export const SET_FINISHED_HORSE = 'SET_FINISHED_HORSE'
 
 const initialState = {
     isConnected: false,
@@ -31,14 +31,14 @@ const betReducer = (state = initialState, action) => {
             return state
     }
 }
-const setSocket = (payload) => {
+export const setSocket = (payload) => {
     return {type: SET_SOCKET, payload}
 }
 
 export const setHorsesData = (payload) => {
     return {type: SET_HORSES_DATA, payload}
 }
-export const setConnection = (payload) => {
+export const setConnectionInfo = (payload) => {
     return {type: SET_CONNECTION_INFO, payload}
 }
 export const setFinishedHorse = (payload) => {
@@ -48,7 +48,7 @@ export const getHorsesData = () => {
     return (dispatch) => {
         const newSocket = io('http://localhost:3002/')
         dispatch(setSocket(newSocket))
-        newSocket.on('connect', () => dispatch(setConnection(newSocket.connected)));
+        newSocket.on('connect', () => dispatch(setConnectionInfo(newSocket.connected)));
         newSocket.emit('start')
         newSocket.on('ticker', (horses) => {
             horses.forEach(horse => horse.distance === 1000 ? dispatch(setFinishedHorse(horse.name)) : null)
