@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getHorsesData} from "./redux/betReducer";
+import Horses from "./components/Horses";
+import Preloader from "./common/Preloader";
+import Error from "./common/Error";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React.
-        </a>
-      </header>
-    </div>
-  );
+    const dispatch = useDispatch()
+    const isConnected = useSelector(state => state.bet.isConnected)
+    const endFetchedData = useSelector(state => state.bet.endFetchedData)
+
+    useEffect(() => {
+        dispatch(getHorsesData())
+    }, [dispatch])
+    if (!endFetchedData) {
+        return <Preloader/>
+    }
+    if (!isConnected) {
+        return <Error/>
+    }
+    return (
+        <div className="App">
+            <Horses/>
+        </div>
+    );
 }
 
 export default App;

@@ -1,0 +1,107 @@
+.mainWrapper {
+  height: 100%;
+  width: 80%;
+  display: grid;
+  align-items: center;
+
+  .horsesWrapper {
+    height: 100%;
+    background: linear-gradient(90deg, #3c8d37 50%, #5fb727 50%);
+    background-size: 200px;
+    border: 5px solid white;
+    border-left: none;
+    border-right: none;
+    display: flex;
+    color: #ffc000;
+    align-items: center;
+    position: relative;
+
+    .distance {
+      height: 100%;
+      color: #541818;
+      font-weight: bold;
+    }
+
+    .horseName {
+      height: 100%;
+    }
+
+    img {
+      width: 200px;
+    }
+
+    .finish {
+      transform: rotate(90deg);
+      font-weight: bold;
+      position: absolute;
+      display: flex;
+      order: -1;
+      left: 90%;
+      color: black;
+      border: 2px solid black;
+      background: white;
+    }
+  }
+
+  .finished {
+    backdrop-filter: blur(5px);
+    background: rgba(128, 128, 128, 0.23);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+
+    .modal {
+      width: 40%;
+      height: 500px;
+      background: rgb(150, 140, 140);
+      border-radius: 15px;
+      box-shadow: 0 0 50px rgba(0,0,0,1);
+      border: 3px solid #5b5858;
+
+      li {
+        margin: 50px 0 0 5%;
+        display: flex;
+        list-style: none;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+
+        &:nth-child(1) {
+          font-size: 30px;
+          color: #ffc000;
+        }
+
+        &:nth-child(2) {
+          font-size: 25px;
+          color: lightgrey;
+        }
+
+        &:nth-child(3) {
+          font-size: 20px;
+          color: orange;
+        }
+
+        &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+          font-size: 17px;
+          color: #412323;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 876px) {
+  .mainWrapper {
+    .horsesWrapper {
+      background-size: 150px;
+
+    }
+  }
+}
